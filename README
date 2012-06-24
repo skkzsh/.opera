@@ -1,0 +1,16 @@
+<!-- -*- gfm -*- -->
+
+# Path
+***
+
+- Windows:
+
+    C:\Users\XXX\AppData\Roaming\Opera\Opera
+
+- Mac:
+
+    ~/Library/Opera
+
+- Linux:
+
+    ~/.opera
