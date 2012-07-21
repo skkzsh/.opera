@@ -166,15 +166,6 @@ sub setup {
         when (/^(sing|drive|leap|box)/) {
             &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );
         }
-        when (/^KOSUKE-PC$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 17, 21 );
-        }
-        when (/^HASHI-PC$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 14, 18 );
-        }
-        when (/^PC-6763$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 15, 16 );
-        }
         default { exit 1 }
     }
 
