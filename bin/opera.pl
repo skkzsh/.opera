@@ -6,9 +6,6 @@
 # or
 # Opera (Next) の設定をDropboxにBackup (Copy)
 #
-# Bookmarkはopera:config (operaprefs.ini) で
-# Dropbox内のbookmar.adrを直接指定
-#
 # [Path]
 # Linux|~/.opera(-next)
 # Mac  |~/Library/Opera (Next)                         |~/Library/Application Support/Opera (Next)
