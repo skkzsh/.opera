@@ -1,36 +1,41 @@
 #!/usr/bin/env perl
-#
-# DropboxにあるOpera (Next) の
-# 設定Fileを共有させるために
-# Symbolic Link and Copy
-# or
-# Opera (Next) の設定をDropboxにBackup (Copy)
-#
-# [Path]
-# Linux|~/.opera(-next)
-# Mac  |~/Library/Opera (Next)                         |~/Library/Application Support/Opera (Next)
-# Win  |C:\Users\xxx\AppData\Roaming\Opera\Opera (Next)|C:\Users\xxx\AppData\Local\Opera\Opera (Next)
-########################################
+
+=head1 DESCRIPTION
+
+=head2 Setup Mode
+
+Symbolic Link and Copy
+Opera [Next] Setting Files
+from Dropbox
+
+=head2 Backup Mode
+
+Copy
+Opera [Next] Setting Files
+to Dropbox
+
+=cut
 
 use strict;
 use warnings;
 use 5.010;
 
-use Sys::Hostname 'hostname';
+use Sys::Hostname qw( hostname );
+use File::Spec::Functions qw( catfile );
 
-use SmartLn;
+use SmartLn qw( smartln );
 
-#### Setup or Backup
+### Setup or Backup
 my $mode;
 $mode = 'setup';
-# $mode = 'backup';
+## $mode = 'backup';
 
-#### Opera or Opera Next
+### Opera or Opera Next
 my $color;
 # $color = 'red';
 $color = 'white';
 
-### 各Directoryに対してSymbolic Link and CopyするFiles
+### Symbolic Link and Copy Files for Each Directory
 my @ln_library_files = qw( keyboard mouse toolbar );
 my @ln_support_files;
 my @cp_library_files = qw( override.ini search.ini );
@@ -39,7 +44,7 @@ my %setup_files = (
     library => { ln => \@ln_library_files, cp => \@cp_library_files },
     support => { ln => \@ln_support_files, cp => \@cp_support_files },
 );
-#### 各Directoryに対してBackupするFiles
+### Backup Files for Each Directory
 my @backup_library_files = @cp_library_files;
 my @backup_support_files;
 my %backup_files = (
@@ -47,27 +52,21 @@ my %backup_files = (
     support => \@backup_support_files,
 );
 
-## DropboxのOperaのDirectory
+## Opera Directory in Dropbox
 ## TODO: WindowsのENVで\を/に変換
 my $prefix_dropbox;
 if ( $^O eq 'MSWin32' ) {
-    if ( hostname =~ /^KOSUKE-PC$/i ) {
-        $prefix_dropbox = "$ENV{USERPROFILE}/Documents";
-    }
-    else {
-        $prefix_dropbox = "$ENV{USERPROFILE}";
-    }
-    $prefix_dropbox =~ s#\\#/#g;
+    $prefix_dropbox = $ENV{USERPROFILE};
 }
 else {
-    $prefix_dropbox = "$ENV{HOME}";
+    $prefix_dropbox = $ENV{HOME};
 }
-my $dropbox = "$prefix_dropbox/Dropbox/setting/.opera";
+my $dropbox = catfile $prefix_dropbox, 'Dropbox', 'setting', '.opera';
 
 given ($color) {
     when ('red')   { print 'Opera ' }
     when ('white') { print 'Opera Next ' }
-    default        { exit 1 }
+    default        { die $color }
 }
 my %dir = &where_are_dirs($color);
 
@@ -80,13 +79,13 @@ given ($mode) {
         say 'Backup !';
         &backup( $dropbox, \%dir, \%backup_files );
     }
-    default { exit 1 }
+    default { die $mode }
 }
 
-### Outputs : Opera (Next) のDirectories (%dir)
-### %dir{''}{'library'} :
-### %dir{''}{'support'} :
-### Arguments : $color
+## Outputs : Opera (Next) のDirectories (%dir)
+# %dir{''}{'library'} :
+# %dir{''}{'support'} :
+## Arguments : $color
 sub where_are_dirs {
     my $color = shift;
 
@@ -96,9 +95,9 @@ sub where_are_dirs {
         ### Linux
         when ('linux') {
             given ($color) {
-                when ('red')   { $dir{'library'} = "$ENV{HOME}/.opera" }
-                when ('white') { $dir{'library'} = "$ENV{HOME}/.opera-next" }
-                default        { exit 1 }
+                when ('red')   { $dir{'library'} = catfile $ENV{HOME}, '.opera' }
+                when ('white') { $dir{'library'} = catfile $ENV{HOME}, '.opera-next' }
+                default        { die $color }
             }
             $dir{'support'} = $dir{'library'};
         }
@@ -108,32 +107,32 @@ sub where_are_dirs {
             given ($color) {
                 when ('red')   { $color_dir = 'Opera' }
                 when ('white') { $color_dir = 'Opera Next' }
-                default        { exit 1 }
+                default        { die $color }
             }
 
             given ($^O) {
                 ### Mac
                 when ('darwin') {
                     $dir{'library'}
-                        = "$ENV{HOME}/Library/$color_dir";
+                        = catfile $ENV{HOME}, 'Library', $color_dir;
                     $dir{'support'}
-                        = "$ENV{HOME}/Library/Application Support/$color_dir";
+                        = catfile $ENV{HOME}, 'Library', 'Application Support', $color_dir;
                 }
                 ### Win
                 when ('MSWin32') {
-                    $dir{'library'} = "$ENV{APPDATA}/Opera/$color_dir";
-                    $dir{'support'} = "$ENV{LOCALAPPDATA}/Opera/$color_dir";
-                    $dir{'library'} =~ s#\\#/#g;
-                    $dir{'support'} =~ s#\\#/#g;
+                    $dir{'library'}
+                        = catfile $ENV{APPDATA}, 'Opera', $color_dir;
+                    $dir{'support'}
+                        = catfile $ENV{LOCALAPPDATA}, 'Opera', $color_dir;
                 }
-                default { exit 1 }
+                default { die $^O }
             }
         }
 
-        default { exit 1 }
+        default { die $^O }
     }
 
-    ### Directoryが存在しなければDie
+    ### Die if Directories NOT Exists
     for my $dir ( values %dir ) {
         die "Error: $dir not exists." unless -d $dir;
     }
@@ -141,21 +140,21 @@ sub where_are_dirs {
     %dir;
 }
 
-### DropboxからOpera (Next) へFilesをSymbolic Link and Copy
-### Arguments
-### $dropbox         : Dropbox内のOperaとOperaDirectory
-### $dir_ref         : Opera (Next) のDirectories(のReference)
-### $setup_files_ref : 各Directoryに対してSymbolic Link and CopyするFiles(のReference)
+## Symbolic Link and Copy Opera [Next] Setting Files from Dropbox
+## Arguments
+# $dropbox         : Opera Directory in Dropbox
+# $dir_ref         : (Reference of) Directories of Opera [Next]
+# $setup_files_ref : (Reference of) Symbolic Link and Copy Files for Each Directory
 sub setup {
     my ( $dropbox, $dir_ref, $setup_files_ref ) = @_;
 
-    for my $dir_type (qw (library support)) {
-        for my $cmd (qw (ln cp)) {
+    for my $dir_type (qw( library support )) {
+        for my $cmd (qw( ln cp )) {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {
                 smartln(
                     $cmd,
-                    "$dropbox/$file",
-                    "$$dir_ref{$dir_type}/$file"
+                    catfile( $dropbox,             $file ),
+                    catfile( $$dir_ref{$dir_type}, $file )
                 );
             }
         }
@@ -166,38 +165,47 @@ sub setup {
         when (/^(sing|drive|leap|box)/) {
             &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );
         }
-        default { exit 1 }
+        default { warn hostname }
     }
 
 }
 
-### DropboxからOpera (Next) へMail SignatureをSymbolic Link
-### Arguments
-### $dropbox     : Dropbox内のOperaとOperaDirectory
-### $dir_support : Opera (Next) のApplication SuppportのDirectory
-### @numbers     : Mail Accountの番号
+## Symbolic Link Opera [Next] Mail Signatures from Dropbox
+## Arguments
+# $dropbox     : Opera Directory in Dropbox
+# $dir_support : Application Suppport Directory of Opera [Next]
+# @numbers     : Numbers of Mail Account
 sub ln_signature {
     my ( $dropbox, $dir_support, @numbers ) = @_;
 
-    my @db_sig = map {"$dropbox/mail/signature$_.txt"} 0 .. 2;
+    my @db_sig = map { catfile $dropbox, 'mail', "signature$_.txt" } 0 .. 2;
 
     my $i;
     for (@numbers) {
-        smartln( 'ln', $db_sig[ ++$i ], "$dir_support/mail/signature$_.txt" );
+        smartln(
+            'ln',
+            $db_sig[ ++$i ],
+            catfile( $dir_support, 'mail', "signature$_.txt" )
+        );
     }
 }
 
-### Opera (Next) からDropboxへFilesをBackup (Copy)
-### Arguments
-### $dropbox          : Dropbox内のOperaとOperaDirectory
-### $dir_ref          : Opera (Next) のDirectories(のReference)
-### $backup_files_ref : 各Directoryに対してBackup (Copy) するFiles(のReference)
+## Copy Opera [Next] Setting Files to Dropbox
+## Arguments
+# $dropbox          : Opera Directory in Dropbox
+# $dir_ref          : (Reference of) Directories of Opera [Next]
+# $backup_files_ref : (Reference of) Backup (= Copy) Files for Each Directory
 sub backup {
     my ( $dropbox, $dir_ref, $backup_files_ref ) = @_;
 
-    for my $dir_type (qw (library support)) {
+    for my $dir_type (qw( library support )) {
         for my $file ( @{ $backup_files_ref->{$dir_type} } ) {
-            smartln( 'cp', "$$dir_ref{$dir_type}/$file", "$dropbox/$file" );
+            # smartln( 'cp', "$$dir_ref{$dir_type}/$file", "$dropbox/$file" );
+            smartln(
+                'cp',
+                catfile( $$dir_ref{$dir_type}, $file ),
+                catfile( $dropbox,             $file )
+            );
         }
     }
 }
