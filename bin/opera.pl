@@ -21,7 +21,7 @@ use warnings;
 use 5.010;
 
 use Sys::Hostname qw( hostname );
-use File::Spec::Functions qw( catfile );
+use Path::Class qw( file dir );
 
 use SmartLn qw( smartln );
 
@@ -53,15 +53,19 @@ my %backup_files = (
 );
 
 ## Opera Directory in Dropbox
-## TODO: WindowsのENVで\を/に変換
 my $prefix_dropbox;
 if ( $^O eq 'MSWin32' ) {
-    $prefix_dropbox = $ENV{USERPROFILE};
+    if ( hostname =~ /^KOSUKE-PC$/i ) {
+        $prefix_dropbox = dir $ENV{USERPROFILE}, 'Documents';
+    }
+    else {
+        $prefix_dropbox = $ENV{USERPROFILE};
+    }
 }
 else {
     $prefix_dropbox = $ENV{HOME};
 }
-my $dropbox = catfile $prefix_dropbox, 'Dropbox', 'setting', '.opera';
+my $dropbox = dir $prefix_dropbox, 'Dropbox', 'setting', '.opera';
 
 given ($color) {
     when ('red')   { print 'Opera ' }
@@ -72,17 +76,17 @@ my %dir = &where_are_dirs($color);
 
 given ($mode) {
     when ('setup') {
-        say 'Setup !';
+        print'Setup !';
         &setup( $dropbox, \%dir, \%setup_files );
     }
     when ('backup') {
-        say 'Backup !';
+        print 'Backup !';
         &backup( $dropbox, \%dir, \%backup_files );
     }
     default { die $mode }
 }
 
-## Outputs : Opera (Next) のDirectories (%dir)
+## Outputs : Opera [Next] Directories (%dir)
 # %dir{''}{'library'} :
 # %dir{''}{'support'} :
 ## Arguments : $color
@@ -95,8 +99,8 @@ sub where_are_dirs {
         ### Linux
         when ('linux') {
             given ($color) {
-                when ('red')   { $dir{'library'} = catfile $ENV{HOME}, '.opera' }
-                when ('white') { $dir{'library'} = catfile $ENV{HOME}, '.opera-next' }
+                when ('red')   { $dir{'library'} = dir $ENV{HOME}, '.opera' }
+                when ('white') { $dir{'library'} = dir $ENV{HOME}, '.opera-next' }
                 default        { die $color }
             }
             $dir{'support'} = $dir{'library'};
@@ -114,16 +118,16 @@ sub where_are_dirs {
                 ### Mac
                 when ('darwin') {
                     $dir{'library'}
-                        = catfile $ENV{HOME}, 'Library', $color_dir;
+                        = dir $ENV{HOME}, 'Library', $color_dir;
                     $dir{'support'}
-                        = catfile $ENV{HOME}, 'Library', 'Application Support', $color_dir;
+                        = dir $ENV{HOME}, 'Library', 'Application Support', $color_dir;
                 }
                 ### Win
                 when ('MSWin32') {
                     $dir{'library'}
-                        = catfile $ENV{APPDATA}, 'Opera', $color_dir;
+                        = dir $ENV{APPDATA}, 'Opera', $color_dir;
                     $dir{'support'}
-                        = catfile $ENV{LOCALAPPDATA}, 'Opera', $color_dir;
+                        = dir $ENV{LOCALAPPDATA}, 'Opera', $color_dir;
                 }
                 default { die $^O }
             }
@@ -153,8 +157,8 @@ sub setup {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {
                 smartln(
                     $cmd,
-                    catfile( $dropbox,             $file ),
-                    catfile( $$dir_ref{$dir_type}, $file )
+                    file( $dropbox,             $file ),
+                    file( $$dir_ref{$dir_type}, $file )
                 );
             }
         }
@@ -165,6 +169,15 @@ sub setup {
         when (/^(sing|drive|leap|box)/) {
             &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );
         }
+        when (/^KOSUKE-PC$/i) {
+            &ln_signature( $dropbox, $$dir_ref{'support'}, 17, 21 );
+        }
+        when (/^HASHI-PC$/i) {
+            &ln_signature( $dropbox, $$dir_ref{'support'}, 14, 18 );
+        }
+        when (/^PC-6763$/i) {
+            &ln_signature( $dropbox, $$dir_ref{'support'}, 15, 16 );
+        }
         default { warn hostname }
     }
 
@@ -174,18 +187,15 @@ sub setup {
 ## Arguments
 # $dropbox     : Opera Directory in Dropbox
 # $dir_support : Application Suppport Directory of Opera [Next]
-# @numbers     : Numbers of Mail Account
+# @num         : Numbers of Mail Accounts
 sub ln_signature {
-    my ( $dropbox, $dir_support, @numbers ) = @_;
+    my ( $dropbox, $dir_support, @num ) = @_;
 
-    my @db_sig = map { catfile $dropbox, 'mail', "signature$_.txt" } 0 .. 2;
-
-    my $i;
-    for (@numbers) {
+    for ( 1 .. 2 ) {
         smartln(
             'ln',
-            $db_sig[ ++$i ],
-            catfile( $dir_support, 'mail', "signature$_.txt" )
+            file( $dropbox,     'mail', "signature$_.txt" ),
+            file( $dir_support, 'mail', "signature$num[$_ - 1].txt" )
         );
     }
 }
@@ -194,18 +204,90 @@ sub ln_signature {
 ## Arguments
 # $dropbox          : Opera Directory in Dropbox
 # $dir_ref          : (Reference of) Directories of Opera [Next]
-# $backup_files_ref : (Reference of) Backup (= Copy) Files for Each Directory
+# $backup_files_ref : (Reference of) Copy Files for Each Directory
 sub backup {
     my ( $dropbox, $dir_ref, $backup_files_ref ) = @_;
 
     for my $dir_type (qw( library support )) {
         for my $file ( @{ $backup_files_ref->{$dir_type} } ) {
-            # smartln( 'cp', "$$dir_ref{$dir_type}/$file", "$dropbox/$file" );
             smartln(
                 'cp',
-                catfile( $$dir_ref{$dir_type}, $file ),
-                catfile( $dropbox,             $file )
+                file( $$dir_ref{$dir_type}, $file ),
+                file( $dropbox,             $file )
             );
         }
     }
 }
+
+=head1 Memo
+
+=head2 Bookmark
+
+Set Directly bookmark.adr in Dropbox
+by opera:config or operaprefs.ini
+
+=head2 File Management
+
+=over 4
+
+=item ln from Dropbox
+
+keyboard mouse toolbar
+
+=item cp from Dropbox
+
+override.ini search.ini
+
+=item ln on Local
+
+global_history.dat opcacrt6.dat opcert6.dat opssl6.dat typed_history.xml sessions wand.dat widgets
+
+=item cp on Local
+
+=item set directly Dropbox by opera:config or operaprefs.ini
+
+bookmarks.adr
+
+=item cp on Local only first
+
+operaprefs.ini mail
+
+=item ln from Dropbox only first
+
+skin
+
+=item Opera Link
+
+notes.adr urlfilter.ini
+
+=item NO Share
+
+contacts.adr speeddial.ini
+
+=back
+
+=head2 Backup Files
+
+=over 4
+
+=item Dropbox
+
+keyboard mouse toolbar override.ini search.ini bookmarks.adr notes.adr urlfilter.ini skin.ini speeddial.ini
+
+=item Local
+
+opcacrt6.dat opcert6.dat opssl6.dat wand.dat widgets operaprefs.ini mail
+
+=back
+
+=head2 PATH
+
+Linux | ~/.opera[-next]
+
+Mac   | ~/Library/Opera [Next]
+      | ~/Library/Application Support/Opera [Next]
+
+Win   | C:\Users\xxx\AppData\Roaming\Opera\Opera [Next]
+      | C:\Users\xxx\AppData\Local\Opera\Opera [Next]
+
+=cut

@@ -21,7 +21,7 @@ Symbolic Link or Copy Carefully
 package SmartLn;
 our @EXPORT    = qw( smartln );
 our @EXPORT_OK = qw();
-use base qw( Exporter );
+use parent qw( Exporter );
 
 use strict;
 use warnings;
@@ -38,7 +38,6 @@ use Term::ReadLine;
 use File::Copy::Recursive qw( rcopy );
 ## use File::Path qw( rmtree );
 
-### TODO: Write Properly Exception Handling and Comment
 
 ## Symbolic Link or Copy Carefully
 ## Arguments
@@ -48,9 +47,10 @@ use File::Copy::Recursive qw( rcopy );
 sub smartln {
     my ( $cmd, $src, $dst ) = @_;
 
+    ### TODO
     ### Exception Handling
     eval {
-        croak "Error: No. of arguments must be 3."
+        croak 'Error: No. of arguments must be 3.'
             unless @_ == 3;
         croak "Error: Invalid Option $cmd"
             unless "$cmd" eq 'ln' or "$cmd" eq 'cp';
@@ -63,61 +63,61 @@ sub smartln {
         return;
     }
 
-    &rm_dst($dst);
-    &link( $cmd, $src, $dst );
+    &smartrm($dst);
+    &symlink_copy( $cmd, $src, $dst );
 }
 
-## Link先 ($dst) が存在すれば
-## 削除するか尋ねて，実行
-sub rm_dst {
-    my $dst = shift;
+## Request Confirmation Before Attempting to Remove $file
+## If $file Exists
+sub smartrm {
+    my $file = shift;
 
-    if ( -l "$dst" or -f "$dst" or -d "$dst" ) {
-        ### 削除するか尋ねる
+    if ( -l $file or -f $file or -d $file ) {
+        ### Request Confirmation Before Attempting to Remove $file
         my $term          = Term::ReadLine->new('unlink');
         my $unlink_or_not = $term->ask_yn(
-            prompt  => "Remove $dst ?",
+            prompt  => "Remove $file ?",
             default => 'y',
         );
 
         if ($unlink_or_not) {
-            if ( -l "$dst" or -f "$dst" ) {
-                unlink "$dst"
-                    and say "Removed";
+            if ( -l $file or -f $file ) {
+                unlink $file
+                    and say 'Removed';
             }
-            elsif ( -d "$dst" ) {
+            elsif ( -d $file ) {
                 ### TODO: Remove Directory
-                ## rmtree "$dst"
-                rmdir "$dst"
-                    and say "Removed";
+                ## rmtree "$file"
+                rmdir $file
+                    and say 'Removed';
             }
             ## and say "Removed";
         }
         else {
-            say "Not Removed";
+            say 'Not Removed';
         }
     }
 
     else {
-        say "Announce    : Try to remove $dst, but not exists.";
+        say "Announce    : Try to remove $file, but not exists.";
     }
 
 }
 
 ## Symbolic Link or Copy from $src to $dst
 ## ($cmd = ln or cp)
-sub link {
+sub symlink_or_copy {
     my ( $cmd, $src, $dst ) = @_;
 
-    if ( -e "$dst" ) {
+    if ( -e $dst ) {
         carp "Announce: $dst exists, so not make link.";
     }
-    elsif ( "$cmd" eq 'ln' ) {
-        &os_symlink( $src, $dst );
+    elsif ( $cmd eq 'ln' ) {
+        &symlink_wrapper( $src, $dst );
     }
-    elsif ( "$cmd" eq 'cp' ) {
-        rcopy "$src", "$dst"
-            and say "Copied";
+    elsif ( $cmd eq 'cp' ) {
+        rcopy $src, $dst
+            and say 'Copied';
     }
     else {
         croak "Error: Invalid Option $cmd";
@@ -125,21 +125,22 @@ sub link {
 }
 
 ## Switch Symbolic Link Command on Win and UNIX
-sub os_symlink {
+sub symlink_wrapper {
     my ( $src, $dst ) = @_;
 
+    ## TODO: system Function
     if ( $^O eq 'MSWin32' ) {
-        if ( -d "$src" ) {
-            system "MKLINK /D \"$dst\" \"$src\"";
+        if ( -d $src ) {
+            system qq( MKLINK /D "$dst" "$src" );
         }
         else {
-            system "MKLINK \"$dst\" \"$src\"";
+            system qq( MKLINK "$dst" "$src" );
         }
     }
 
     else {
-        symlink "$src", "$dst"
-            and say "New Linked";
+        symlink $src, $dst
+            and say 'New Linked';
     }
 }
 

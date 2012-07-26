@@ -11,7 +11,7 @@ use strict;
 use warnings;
 use 5.010;
 
-use File::Spec::Functions qw( catfile );
+use Path::Class qw( file dir );
 
 use SmartLn qw( smartln );
 
@@ -32,12 +32,12 @@ my %setup_files = (
 
 );
 
-my %dir = &where_are_dirs;
+my %dir = &where_are_dirs();
 &setup( \%dir, \%setup_files );
 
-### Outputs : Directories of Opera and Opera Next (%dir)
-# %dir{'red'}{''}     : OperaのDirectories
-# %dir{'white'}{''}   : Opera NextのDirecties
+### Outputs : Opera and Opera Next Directories (%dir)
+# %dir{'red'}{''}     : Opera Directories
+# %dir{'white'}{''}   : Opera Next Directies
 # %dir{''}{'library'} :
 # %dir{''}{'support'} :
 sub where_are_dirs {
@@ -48,9 +48,9 @@ sub where_are_dirs {
         ### Linux
         when ('linux') {
             $dir{'red'}{'library'} = $dir{'red'}{'support'}
-                = catfile $ENV{HOME}, '.opera';
+                = dir $ENV{HOME}, '.opera';
             $dir{'white'}{'library'} = $dir{'white'}{'support'}
-                = catfile $ENV{HOME}, '.opera-next';
+                = dir $ENV{HOME}, '.opera-next';
         }
 
         when (/^(darwin|MSWin32)$/) {
@@ -62,23 +62,22 @@ sub where_are_dirs {
                 ### Mac
                 when ('darwin') {
                     $library
-                        = catfile $ENV{HOME}, 'Library';
+                        = dir $ENV{HOME}, 'Library';
                     $support
-                        = catfile $ENV{HOME}, 'Library', 'Application Support';
+                        = dir $ENV{HOME}, 'Library', 'Application Support';
                 }
                 ### Win
-                ## TODO: WindowsのENVで\を/に変換
                 when ('MSWin32') {
-                    $library = catfile $ENV{APPDATA}, 'Opera';
-                    $support = catfile $ENV{LOCALAPPDATA}, 'Opera';
+                    $library = dir $ENV{APPDATA}, 'Opera';
+                    $support = dir $ENV{LOCALAPPDATA}, 'Opera';
                 }
                 default { die $^O }
             }
 
-            $dir{'red'}{'library'}   = catfile $library, $red;
-            $dir{'red'}{'support'}   = catfile $support, $red;
-            $dir{'white'}{'library'} = catfile $library, $white;
-            $dir{'white'}{'support'} = catfile $support, $white;
+            $dir{'red'}{'library'}   = dir $library, $red;
+            $dir{'red'}{'support'}   = dir $support, $red;
+            $dir{'white'}{'library'} = dir $library, $white;
+            $dir{'white'}{'support'} = dir $support, $white;
 
         }
 
@@ -107,8 +106,8 @@ sub setup {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {
                 smartln(
                     $cmd,
-                    catfile( $$dir_ref{'red'}{$dir_type},   $file ),
-                    catfile( $$dir_ref{'white'}{$dir_type}, $file )
+                    file( $$dir_ref{'red'}{$dir_type},   $file ),
+                    file( $$dir_ref{'white'}{$dir_type}, $file )
                 );
             }
         }
