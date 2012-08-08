@@ -107,5 +107,5 @@ EXIT /B 0
 
 
 :usage
-where pod2usage > nul 2>&1 && pod2usage %1
+WHERE /Q pod2usage && pod2usage %1
 EXIT /B 0

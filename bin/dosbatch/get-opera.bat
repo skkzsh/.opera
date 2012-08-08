@@ -4,11 +4,11 @@ SETLOCAL
 :::: Download Opera Setting Files from Internet
 
 :::: Require curl (or wget) for Windows
-:: SET get_cmd=wget
 SET get_cmd=curl
-where %get_cmd% > nul 2>&1
+:: SET get_cmd=wget
+WHERE /Q %get_cmd%
 if %ERRORLEVEL% NEQ 0 (
-    ECHO Error: Command %get_cmd% is required. >&2
+    ECHO Error: Command "%get_cmd%" is required. >&2
     EXIT /B 1
 )
 
