@@ -1,5 +1,5 @@
 # Path
-***
+* * *
 
 - Windows:
 
@@ -12,3 +12,9 @@
 - Linux:
 
     ~/.opera
+
+
+# Setup Script
+* * *
+
+bin
