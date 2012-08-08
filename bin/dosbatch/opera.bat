@@ -1,46 +1,68 @@
-@echo off
+@ECHO OFF
+SETLOCAL
 ::
 :: Dropbox‚É‚ ‚éOpera (Next) ‚Ì
 :: Ý’èFile‚ð‹¤—L‚³‚¹‚é‚½‚ß‚É
 :: Symbolic Link‚ð’£‚é,
 :: ‚Ü‚½‚ÍCopy‚·‚é.
 ::
+:: Bookmark‚Íopera:config (operaprefs.ini) ‚Å
+:: Dropbox“à‚Ìbookmar.adr‚ð’¼ÚŽw’è
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::: TODO
+
+:::: Setup or Backup
+SET mode=setup
+:: SET mode=backup
+
 :::: Opera or Opera Next
 :: SET color=Opera
 SET color=Opera Next
 
-:::: Setting
-
-::: Local‚ÌOpera‚ÌDirectories
-SET app="%APPDATA%\Opera\%color%"
-SET localapp="%LOCALAPPDATA%\Opera\%color%"
-
-::: Dropbox‚ÌOpera‚ÌDirectory
-SET prefix_dropbox=%HOMEPATH%\Dropbox
-SET dropbox=%prefix_dropbox%\setting\.opera
-
-
 :::: ln‚Æcp‚ÌList
 SET ln_app_folders=keyboard mouse skin toolbar
+:: SET ln_app_files=
+:: SET cp_app_folders=
 SET cp_app_files=override.ini search.ini
+:: SET ln_local_folders=
+:: SET ln_local_files=
+:: SET cp_local_folders=
+:: SET cp_local_files=
+
+:::: Backup‚ÌList
+:: SET backup_app_folders=
+:: SET backup_app_files=
+:: SET backup_local_folders=
+:: SET backup_local_files=
+
+::: Local‚ÌOpera‚ÌDirectories
+SET app=%APPDATA%\Opera\%color%
+SET localapp=%LOCALAPPDATA%\Opera\%color%
+
+::: Dropbox‚ÌOpera‚ÌDirectory
+SET prefix_dropbox=%USERPROFILE%\Dropbox
+SET dropbox=%prefix_dropbox%\setting\.opera
+::: EXIT if These Folders NOT Exist
+FOR %%i IN ("%app%" "%localapp%" "%dropbox%") DO (
+    IF NOT EXIST %%i (
+        ECHO Error: %%i not exists. >&2
+        EXIT /B 1
+    )
+)
 
 :::: Symbolic Link
 ::: APPDATA
 :: Folders
 FOR %%i IN (%ln_app_folders%) DO (
-    RD %app%\%%i
-    MKLINK /D %app%\%%i %dropbox%\%%i
+    CALL smartln.bat "mklink" "%dropbox%\%%i" "%app%\%%i"
 )
 
 :::: Copy
 ::: APPDATA
 :: Files
-for %%i in (%cp_app_files%) do (
-    DEL /P %app%\%%i
-    COPY /-Y %dropbox%\%%i %app%\%%i
+FOR %%i in (%cp_app_files%) do (
+    CALL smartln.bat "copy" "%dropbox%\%%i" "%app%\%%i"
 )
 
 ::: Mail Signature
@@ -51,3 +73,6 @@ FOR /L %%i in (1 1 2) DO (
 )
 
 SET localapp_sig=%localapp%\mail\signature
+
+ENDLOCAL
+EXIT /B 0
