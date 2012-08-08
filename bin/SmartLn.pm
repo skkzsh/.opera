@@ -64,7 +64,7 @@ sub smartln {
     }
 
     &smartrm($dst);
-    &symlink_copy( $cmd, $src, $dst );
+    &symlink_or_copy( $cmd, $src, $dst );
 }
 
 ## Request Confirmation Before Attempting to Remove $file
