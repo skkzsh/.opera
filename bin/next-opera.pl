@@ -56,6 +56,7 @@ sub where_are_dirs {
         when (/^(darwin|MSWin32)$/) {
             my $red   = 'Opera';
             my $white = 'Opera Next';
+            # my $white = 'Opera Labs SPDY';
 
             my ( $library, $support );
             given ($^O) {
@@ -84,7 +85,7 @@ sub where_are_dirs {
         default { die $^O }
     }
 
-    ### Die if Directories NOT Exists
+    ### Die if Directories NOT Exist
     for my $color_ref ( values %dir ) {
         for my $dir ( values %$color_ref ) {
             die "Error: $dir not exists." unless -d $dir;

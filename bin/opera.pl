@@ -28,12 +28,13 @@ use SmartLn qw( smartln );
 ### Setup or Backup
 my $mode;
 $mode = 'setup';
-## $mode = 'backup';
+# $mode = 'backup';
 
 ### Opera or Opera Next
 my $color;
-# $color = 'red';
-$color = 'white';
+$color = 'red';
+# $color = 'white';
+# $color = 'spdy';
 
 ### Symbolic Link and Copy Files for Each Directory
 my @ln_library_files = qw( keyboard mouse toolbar );
@@ -70,17 +71,18 @@ my $dropbox = dir $prefix_dropbox, 'Dropbox', 'setting', '.opera';
 given ($color) {
     when ('red')   { print 'Opera ' }
     when ('white') { print 'Opera Next ' }
+    when ('spdy')  { print 'Opera Labs SPDY ' }
     default        { die $color }
 }
 my %dir = &where_are_dirs($color);
 
 given ($mode) {
     when ('setup') {
-        print'Setup !';
+        say 'Setup !';
         &setup( $dropbox, \%dir, \%setup_files );
     }
     when ('backup') {
-        print 'Backup !';
+        say 'Backup !';
         &backup( $dropbox, \%dir, \%backup_files );
     }
     default { die $mode }
@@ -111,6 +113,7 @@ sub where_are_dirs {
             given ($color) {
                 when ('red')   { $color_dir = 'Opera' }
                 when ('white') { $color_dir = 'Opera Next' }
+                when ('spdy')  { $color_dir = 'Opera Labs SPDY' }
                 default        { die $color }
             }
 
@@ -272,7 +275,7 @@ contacts.adr speeddial.ini
 
 =item Dropbox
 
-keyboard mouse toolbar override.ini search.ini bookmarks.adr notes.adr urlfilter.ini skin.ini speeddial.ini
+keyboard mouse toolbar override.ini search.ini bookmarks.adr notes.adr urlfilter.ini skin speeddial.ini
 
 =item Local
 
