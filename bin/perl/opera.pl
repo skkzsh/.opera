@@ -56,12 +56,7 @@ my %backup_files = (
 ## Opera Directory in Dropbox
 my $prefix_dropbox;
 if ( $^O eq 'MSWin32' ) {
-    if ( hostname =~ /^KOSUKE-PC$/i ) {
-        $prefix_dropbox = dir $ENV{USERPROFILE}, 'Documents';
-    }
-    else {
-        $prefix_dropbox = $ENV{USERPROFILE};
-    }
+    $prefix_dropbox = $ENV{USERPROFILE};
 }
 else {
     $prefix_dropbox = $ENV{HOME};
@@ -171,15 +166,6 @@ sub setup {
     given (hostname) {
         when (/^(sing|drive|leap|box)/) {
             &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );
-        }
-        when (/^KOSUKE-PC$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 17, 21 );
-        }
-        when (/^HASHI-PC$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 14, 18 );
-        }
-        when (/^PC-6763$/i) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 15, 16 );
         }
         default { warn hostname }
     }
