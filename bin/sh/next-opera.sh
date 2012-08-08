@@ -12,8 +12,8 @@ alias cp='cp -i'
 
 ## lnとcpのList
 ln_list='global_history.dat opcacrt6.dat opcert6.dat opssl6.dat typed_history.xml sessions wand.dat'
-ln_support_list='widgets'
 cp_list=''
+ln_support_list='widgets'
 cp_support_list=''
 
 

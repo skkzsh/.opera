@@ -14,8 +14,8 @@
 
 
 ### Setup or Backup
-# mode=setup
-mode=backup
+mode=setup
+# mode=backup
 
 ### Opera or Opera Next
 color=red
@@ -27,8 +27,8 @@ alias cp='cp -i'
 
 ## lnとcpのList
 ln_list='keyboard mouse toolbar'
-ln_support_list=''
 cp_list='override.ini search.ini'
+ln_support_list=''
 cp_support_list=''
 ## BackupのList
 backup_list="$cp_list"

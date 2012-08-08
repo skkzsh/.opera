@@ -229,60 +229,6 @@ sub backup {
 Set Directly bookmark.adr in Dropbox
 by opera:config or operaprefs.ini
 
-=head2 File Management
-
-=over 4
-
-=item ln from Dropbox
-
-keyboard mouse toolbar
-
-=item cp from Dropbox
-
-override.ini search.ini
-
-=item ln on Local
-
-global_history.dat opcacrt6.dat opcert6.dat opssl6.dat typed_history.xml sessions wand.dat widgets
-
-=item cp on Local
-
-=item set directly Dropbox by opera:config or operaprefs.ini
-
-bookmarks.adr
-
-=item cp on Local only first
-
-operaprefs.ini mail
-
-=item ln from Dropbox only first
-
-skin
-
-=item Opera Link
-
-notes.adr urlfilter.ini
-
-=item NO Share
-
-contacts.adr speeddial.ini
-
-=back
-
-=head2 Backup Files
-
-=over 4
-
-=item Dropbox
-
-keyboard mouse toolbar override.ini search.ini bookmarks.adr notes.adr urlfilter.ini skin speeddial.ini
-
-=item Local
-
-opcacrt6.dat opcert6.dat opssl6.dat wand.dat widgets operaprefs.ini mail
-
-=back
-
 =head2 PATH
 
 Linux | ~/.opera[-next]
