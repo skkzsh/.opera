@@ -28,6 +28,7 @@ foreach ($dir in $app_red, $localapp_red, $app_white, $localapp_white) {
 }
 
 ### MKLINK‚ÆCOPY‚ÌList
+### TODO: Hash
 $ln_app_folders = 'sessions'
 # $ln_app_files =
 # $cp_app_folders =
@@ -41,20 +42,26 @@ $ln_localapp_folders = 'widgets'
 ## APPDATA
 ## Folders
 foreach ($file in $ln_app_folders) {
-    CMD /C "smartln.bat `"mklink`" `"$app_red\$file`" `"$app_white\$file`""
+    smartln.ps1 mklink "$app_red\$file" "$app_white\$file"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"mklink`" `"$app_red\$file`" `"$app_white\$file`""
 }
 
 ### LOCALAPPDATA
 ## Folders
 foreach ($file in $ln_localapp_folders) {
-    CMD /C "smartln.bat `"mklink`" `"$localapp_red\$file`" `"$localapp_white\$file`""
+    smartln.ps1 mklink "$localapp_red\$file" "$localapp_white\$file"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"mklink`" `"$localapp_red\$file`" `"$localapp_white\$file`""
 }
 
 ### COPY
 ## APPDATA
 ## Files
 foreach ($file in $cp_app_files) {
-    CMD /C "smartln.bat `"copy`" `"$app_red\$file`" `"$app_white\$file`""
+    smartln.ps1 copy "$app_red\$file" "$app_white\$file"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"copy`" `"$app_red\$file`" `"$app_white\$file`""
 }
 
 exit 0

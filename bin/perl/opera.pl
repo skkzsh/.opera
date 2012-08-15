@@ -27,8 +27,8 @@ use SmartLn qw( smartln );
 
 ### Setup or Backup
 my $mode;
-$mode = 'setup';
-# $mode = 'backup';
+# $mode = 'setup';
+$mode = 'backup';
 
 ### Opera or Opera Next
 my $color;
@@ -163,6 +163,7 @@ sub setup {
     }
 
     ### Mail Signaure
+    ### TODO: まとめる
     given (hostname) {
         when (/^(sing|drive|leap|box)/) {
             &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );

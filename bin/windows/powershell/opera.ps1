@@ -1,6 +1,5 @@
 <#
 =head1 DESCRIPTION
-
 =head2 Setup Mode
 
 Symbolic Link and Copy
@@ -20,6 +19,7 @@ $color = 'Opera'
 
 
 ### ln‚Æcp‚ÌList
+## TODO: Hash
 $ln_app_folders = 'keyboard', 'mouse', 'skin', 'toolbar'
 # $ln_app_files =
 # $cp_app_folders =
@@ -51,30 +51,35 @@ foreach ($dir in $app, $localapp, $dropbox) {
     }
 }
 
-## TODO: CMD /C
 ### Symbolic Link
 ## APPDATA
 ## Folders
 foreach ($file in $ln_app_folders) {
-    CMD /C "smartln.bat `"mklink`" `"$dropbox\$file`" `"$app\$file`""
+    .\smartln.ps1 mklink "$dropbox\$file" "$app\$file"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"mklink`" `"$dropbox\$file`" `"$app\$file`""
 }
 
 ### Copy
 ## APPDATA
 ## Files
 foreach ($file in $cp_app_files) {
-    CMD /C "smartln.bat `"copy`" `"$dropbox\$file`" `"$app\$file`""
+    .\smartln.ps1 copy "$dropbox\$file" "$app\$file"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"copy`" `"$dropbox\$file`" `"$app\$file`""
 }
 
 ### Mail Signature
-## TODO: •Ï”“WŠJ
+## TODO: Variable Expansion
 
 switch ($ENV:COMPUTERNAME) {
     default     { $ENV:COMPUTERNAME }
 }
 
 foreach ($i in 1..2) {
-    CMD /C "smartln.bat `"mklink`" `"$dropbox\mail\signature$i.txt`" `"$localapp\mail\signature$($num[$($i - 1)]).txt`""
+    .\smartln.ps1 mklink "$dropbox\mail\signature$i.txt" "$localapp\mail\signature$($num[$($i - 1)]).txt"
+    ## HACK: This is equal to:
+    ## cmd /c "smartln.bat `"mklink`" `"$dropbox\mail\signature$i.txt`" `"$localapp\mail\signature$($num[$($i - 1)]).txt`""
 }
 
 exit 0
