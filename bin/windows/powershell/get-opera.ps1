@@ -1,9 +1,6 @@
 <#
-=head1 DESCRIPTION
-
+.SYNOPSIS
 Get My Opera Setting Files from Internet
-
-=cut
 #>
 
 ### Opera or Opera Next
@@ -15,8 +12,7 @@ $app = "$ENV:APPDATA/Opera/$color"
 ### EXIT if Folder NOT Exist
 foreach ($dir in $app) {
     if (-not(Test-Path $dir)) {
-        # "Error: $dir not exists." >&2
-        "Error: $dir not exists."
+        Write-Error "Error: $dir not exists."
         exit 1
     }
 }
@@ -24,11 +20,11 @@ foreach ($dir in $app) {
 $get_files = 'search.ini', 'keyboard/my_keyboard.ini', 'mouse/my_mouse.ini', 'toolbar/standard_toolbar.ini'
 $get_url = 'https://raw.github.com/skkzsh/.opera/master'
 
-$hoge = New-Object System.Net.WebClient
+$wc = New-Object System.Net.WebClient
 foreach ($file in $get_files) {
-    echo "--- Download $file ---" "from $get_url" "to $app ..."
-    $hoge.DownloadFile("$get_url/$file", "$app/$file")
-    # (new-object System.Net.WebClient).DownloadFile("$get_url/$file", "$app/$file")
+    # Write-Progress -a "--- Download $file ---" -st "from $get_url" "to $app ..."
+    Write-Output "--- Download $file ---" "from $get_url" "to $app ..."
+    $wc.DownloadFile("$get_url/$file", "$app/$file")
 }
 
 exit 0

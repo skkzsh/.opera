@@ -1,28 +1,24 @@
 <#
-=head1 DESCRIPTION
-
+.SYNOPSIS
 Symbolic Link and Copy Setting Files
 in order to Share Opera Settings with Opera Next ones
-
-=cut
 #>
 
 #### Setting
 
 ### Opera‚ÆOpera Next‚ÌDirecties
-$red = 'Opera'
+$red   = 'Opera'
 $white = 'Opera Next'
 
-$app_red = "$ENV:APPDATA\Opera\$red"
-$localapp_red = "$ENV:LOCALAPPDATA\Opera\$red"
-$app_white = "$ENV:APPDATA\Opera\$white"
+$app_red        = "$ENV:APPDATA\Opera\$red"
+$localapp_red   = "$ENV:LOCALAPPDATA\Opera\$red"
+$app_white      = "$ENV:APPDATA\Opera\$white"
 $localapp_white = "$ENV:LOCALAPPDATA\Opera\$white"
 
 ### EXIT if These Folders NOT Exist
 foreach ($dir in $app_red, $localapp_red, $app_white, $localapp_white) {
     if (-not(Test-Path $dir)) {
-        # "Error: $dir not exists." >&2
-        "Error: $dir not exists."
+        $Host.UI.WriteErrorLine("Error: $dir not exists.")
         exit 1
     }
 }
@@ -43,16 +39,12 @@ $ln_localapp_folders = 'widgets'
 ## Folders
 foreach ($file in $ln_app_folders) {
     smartln.ps1 mklink "$app_red\$file" "$app_white\$file"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"mklink`" `"$app_red\$file`" `"$app_white\$file`""
 }
 
 ### LOCALAPPDATA
 ## Folders
 foreach ($file in $ln_localapp_folders) {
     smartln.ps1 mklink "$localapp_red\$file" "$localapp_white\$file"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"mklink`" `"$localapp_red\$file`" `"$localapp_white\$file`""
 }
 
 ### COPY
@@ -60,8 +52,6 @@ foreach ($file in $ln_localapp_folders) {
 ## Files
 foreach ($file in $cp_app_files) {
     smartln.ps1 copy "$app_red\$file" "$app_white\$file"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"copy`" `"$app_red\$file`" `"$app_white\$file`""
 }
 
 exit 0

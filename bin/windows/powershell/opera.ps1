@@ -1,12 +1,12 @@
 <#
-=head1 DESCRIPTION
-=head2 Setup Mode
 
+.SYNOPSIS
+
+[Setup Mode]
 Symbolic Link and Copy
 Opera [Next] Setting Files
 from Dropbox
 
-=cut
 #>
 
 ### Setup or Backup
@@ -45,8 +45,7 @@ $dropbox = "$prefix_dropbox\setting\.opera"
 ### EXIT if These Folders NOT Exist
 foreach ($dir in $app, $localapp, $dropbox) {
     if (-not(Test-Path $dir)) {
-        # "Error: $dir not exists." >&2
-        "Error: $dir not exists."
+        $Host.UI.WriteErrorLine("Error: $dir not exists.")
         exit 1
     }
 }
@@ -55,18 +54,14 @@ foreach ($dir in $app, $localapp, $dropbox) {
 ## APPDATA
 ## Folders
 foreach ($file in $ln_app_folders) {
-    .\smartln.ps1 mklink "$dropbox\$file" "$app\$file"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"mklink`" `"$dropbox\$file`" `"$app\$file`""
+    smartln.ps1 mklink "$dropbox\$file" "$app\$file"
 }
 
 ### Copy
 ## APPDATA
 ## Files
 foreach ($file in $cp_app_files) {
-    .\smartln.ps1 copy "$dropbox\$file" "$app\$file"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"copy`" `"$dropbox\$file`" `"$app\$file`""
+    smartln.ps1 copy "$dropbox\$file" "$app\$file"
 }
 
 ### Mail Signature
@@ -77,9 +72,7 @@ switch ($ENV:COMPUTERNAME) {
 }
 
 foreach ($i in 1..2) {
-    .\smartln.ps1 mklink "$dropbox\mail\signature$i.txt" "$localapp\mail\signature$($num[$($i - 1)]).txt"
-    ## HACK: This is equal to:
-    ## cmd /c "smartln.bat `"mklink`" `"$dropbox\mail\signature$i.txt`" `"$localapp\mail\signature$($num[$($i - 1)]).txt`""
+    smartln.ps1 mklink "$dropbox\mail\signature$i.txt" "$localapp\mail\signature$($num[$($i - 1)]).txt"
 }
 
 exit 0
