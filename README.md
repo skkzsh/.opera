@@ -3,15 +3,15 @@
 
 - Windows:
 
-    C:\Users\XXX\AppData\Roaming\Opera\Opera
+    %APPDATA%\Opera\Opera
 
 - Mac:
 
-    ~/Library/Opera
+    $HOME/Library/Opera
 
 - Linux:
 
-    ~/.opera
+    $HOME/.opera
 
 
 # Setup Script
