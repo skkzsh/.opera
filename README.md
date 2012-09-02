@@ -3,15 +3,15 @@
 
 - [keyboard](keyboard)
 
-    Control which key commands do what in Opera
+    Control which key commands do what
 
 - [mouse](mouse)
 
-    Control which mouse gestures do what in Opera
+    Control which mouse gestures do what
 
 - [toolbar](toolbar)
 
-    Control toolbar layout in Opera
+    Control toolbar layout
 
 - [search.ini](search.ini)
 
