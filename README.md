@@ -23,7 +23,7 @@ See also [opera:about](opera:about).
 * * *
 
 
-- Opera Support | Learn More about Opera
+- Opera Support
     - [File used by Opera](http://www.opera.com/docs/operafiles)
     - [Opera's Command Line Options](http://www.opera.com/docs/switches)
 
