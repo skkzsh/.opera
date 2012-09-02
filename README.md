@@ -12,17 +12,9 @@
 # Profile Directory
 * * *
 
-- __Windows__:
-
-`%APPDATA%\Opera\Opera`
-
-- __Mac__:
-
-`$HOME/Library/Opera`
-
-- __Linux__:
-
-`$HOME/.opera`
+- Windows: `%APPDATA%\Opera\Opera`
+- Mac: `$HOME/Library/Opera`
+- Linux: `$HOME/.opera`
 
 
 # Userful Information
