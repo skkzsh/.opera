@@ -32,10 +32,12 @@ See also [opera:about](opera:about).
     - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
 
 
-- Help
-    - Type [opera:help](opera:help) in the address bar
-    - Click '_Help -> Opera Help_' in the menu
-    - `opera --help` or `man opera` on Linux
+- [Opera Help](http://help.opera.com)
+    - [Backing up Opera](http://help.opera.com/Windows/12.00/en/backup.html) (Opera 12.00; Windows)
+
+>  - Type [opera:help](opera:help) in the address bar
+>  - Click '_Help -> Opera Help_' in the menu
+>  - `opera --help` or `man opera` on Linux
 
 
 ## For Japanese
@@ -47,3 +49,6 @@ See also [opera:about](opera:about).
     - [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
     - [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
     - [search.ini](http://ja.opera-wiki.com/search.ini)
+
+- [Opera ヘルプ](http://help.opera.com)
+    - [Operaのバックアップ](http://help.opera.com/Windows/12.00/ja/backup.html) (Opera 12.00; Windows)
