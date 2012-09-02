@@ -19,7 +19,7 @@
 See also [opera:about](opera:about).
 
 
-# Userful Information
+# Useful Information
 * * *
 
 
