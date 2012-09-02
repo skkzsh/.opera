@@ -27,11 +27,6 @@ See also [opera:about](opera:about).
     - [File used by Opera](http://www.opera.com/docs/operafiles)
     - [Opera's Command Line Options](http://www.opera.com/docs/switches)
 
-- [Opera Browser Wiki](http://operawiki.info)
-    - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
-    - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
-
-
 - [Opera Help](http://help.opera.com)
     - [Backing up Opera](http://help.opera.com/Windows/12.00/en/backup.html) (Opera 12.00; Windows)
 
@@ -39,8 +34,15 @@ See also [opera:about](opera:about).
 >  - Click '_Help -> Opera Help_' in the menu
 >  - `opera --help` or `man opera` on Linux
 
+- [Opera Browser Wiki](http://operawiki.info)
+    - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
+    - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
+
 
 ## For Japanese
+
+- [Opera ヘルプ](http://help.opera.com)
+    - [Operaのバックアップ](http://help.opera.com/Windows/12.00/ja/backup.html) (Opera 12.00; Windows)
 
 - [Opera Wiki (jp)](http://ja.opera-wiki.com)
     - [設定フォルダ](http://ja.opera-wiki.com/設定フォルダ)
@@ -49,6 +51,3 @@ See also [opera:about](opera:about).
     - [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
     - [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
     - [search.ini](http://ja.opera-wiki.com/search.ini)
-
-- [Opera ヘルプ](http://help.opera.com)
-    - [Operaのバックアップ](http://help.opera.com/Windows/12.00/ja/backup.html) (Opera 12.00; Windows)
