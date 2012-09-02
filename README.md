@@ -1,3 +1,31 @@
+# List
+* * *
+
+- [keyboard](keyboard)
+
+    Control which key commands do what in Opera
+
+- [mouse](mouse)
+
+    Control which mouse gestures do what in Opera
+
+- [toolbar](toolbar)
+
+    Control toolbar layout in Opera
+
+- [search.ini](search.ini)
+
+    Define the search options
+
+- [bin](bin)
+
+    My setup script
+
+- [README.md](README.md)
+
+    This file
+
+
 # Path
 * * *
 
@@ -21,6 +49,11 @@
     - [Opera Help](http://help.opera.com)
     - [File used by Opera](http://www.opera.com/docs/operafiles)
 
+- [Opera Wiki](http://operawiki.info)
+    - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
+    - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
+
+
 ## for Japanese
 
 - [Opera Wiki](http://ja.opera-wiki.com)
@@ -30,9 +63,3 @@
     - [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
     - [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
     - [search.ini](http://ja.opera-wiki.com/search.ini)
-
-
-# Setup Script
-* * *
-
-bin
