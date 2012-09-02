@@ -1,12 +1,12 @@
 # File List
 * * *
 
-- [keyboard](keyboard) controls which key commands do what.
-- [mouse](mouse) controls which mouse gestures do what.
-- [toolbar](toolbar) controls toolbar layout.
-- [search.ini](search.ini) defines the search options.
-- [bin](bin) includes my setup scripts.
-- [README.md](README.md) is this file.
+- [keyboard](tree/master/keyboard) controls which key commands do what.
+- [mouse](tree/master/mouse) controls which mouse gestures do what.
+- [toolbar](tree/master/toolbar) controls toolbar layout.
+- [search.ini](tree/master/search.ini) defines the search options.
+- [bin](blob/master/bin) includes my setup scripts.
+- [README.md](blob/master/README.md) is this file.
 
 
 # Profile Directory
