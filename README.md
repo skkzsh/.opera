@@ -23,20 +23,28 @@ See also [opera:about](opera:about).
 * * *
 
 
-- [Opera Support | Learn More about Opera](http://www.opera.com/support) (or click '_Help -> Support_' in the menu)
+- Opera Support | Learn More about Opera
     - [File used by Opera](http://www.opera.com/docs/operafiles)
     - [Opera's Command Line Options](http://www.opera.com/docs/switches)
 
-- [Opera Help](http://help.opera.com)
+> Click '_Help -> Support_' in the menu, or visit [opera.com/support](http://www.opera.com/support).
+
+- Opera Help
     - [Backing up Opera](http://help.opera.com/Windows/12.00/en/backup.html) (Opera 12.00; Windows)
 
->  - Type [opera:help](opera:help) in the address bar
->  - Click '_Help -> Opera Help_' in the menu
->  - `opera --help` or `man opera` on Linux
+> Click '_Help -> Opera Help_' in the menu, or type [opera:help](opera:help) in the address bar, or visit [help.opera.com](http://help.opera.com).
+
+- About Opera
+
+> Click '_Help -> About Opera_' in the menu, or type [opera:about](opera:about) in the address bar.
+
 
 - [Opera Browser Wiki](http://operawiki.info)
     - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
     - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
+
+- Others
+    - `opera --help` or `man opera` on Linux
 
 
 ## For Japanese
