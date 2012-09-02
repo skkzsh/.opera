@@ -1,12 +1,12 @@
 # File List
 * * *
 
-- [keyboard](tree/master/keyboard) controls which key commands do what.
-- [mouse](tree/master/mouse) controls which mouse gestures do what.
-- [toolbar](tree/master/toolbar) controls toolbar layout.
-- [search.ini](tree/master/search.ini) defines the search options.
-- [bin](blob/master/bin) includes my setup scripts.
-- [README.md](blob/master/README.md) is this file.
+- [keyboard](.opera/tree/master/keyboard) controls which key commands do what.
+- [mouse](.opera/tree/master/mouse) controls which mouse gestures do what.
+- [toolbar](.opera/tree/master/toolbar) controls toolbar layout.
+- [search.ini](.opera/tree/master/search.ini) defines the search options.
+- [bin](.opera/blob/master/bin) includes my setup scripts.
+- [README.md](.opera/blob/master/README.md) is this file.
 
 
 # Profile Directory
