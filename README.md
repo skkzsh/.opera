@@ -16,6 +16,8 @@
 - Mac: `$HOME/Library/Opera`
 - Linux: `$HOME/.opera`
 
+See also [opera:about](opera:about).
+
 
 # Userful Information
 * * *
