@@ -1,62 +1,52 @@
-# List
+# File List
 * * *
 
-- [keyboard](keyboard)
-
-    Control which key commands do what
-
-- [mouse](mouse)
-
-    Control which mouse gestures do what
-
-- [toolbar](toolbar)
-
-    Control toolbar layout
-
-- [search.ini](search.ini)
-
-    Define the search options
-
-- [bin](bin)
-
-    My setup script
-
-- [README.md](README.md)
-
-    This file
+- [keyboard](keyboard) controls which key commands do what.
+- [mouse](mouse) controls which mouse gestures do what.
+- [toolbar](toolbar) controls toolbar layout.
+- [search.ini](search.ini) defines the search options.
+- [bin](bin) includes my setup scripts.
+- [README.md](README.md) is this file.
 
 
-# Path
+# Profile Directory
 * * *
 
-- Windows:
+- __Windows__:
 
-    %APPDATA%\Opera\Opera
+`%APPDATA%\Opera\Opera`
 
-- Mac:
+- __Mac__:
 
-    $HOME/Library/Opera
+`$HOME/Library/Opera`
 
-- Linux:
+- __Linux__:
 
-    $HOME/.opera
+`$HOME/.opera`
 
 
-# Helpful Websites
+# Userful Information
 * * *
 
-- [Opera Support](http://www.opera.com/support)
-    - [Opera Help](http://help.opera.com)
+
+- [Opera Support | Learn More about Opera](http://www.opera.com/support) (or click '_Help -> Support_' in the menu)
     - [File used by Opera](http://www.opera.com/docs/operafiles)
+    - [Opera's Command Line Options](http://www.opera.com/docs/switches)
 
-- [Opera Wiki](http://operawiki.info)
+- [Opera Browser Wiki](http://operawiki.info)
     - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
     - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
 
 
-## for Japanese
+- Help
+    - Type [opera:help](opera:help) in the address bar
+    - Click '_Help -> Opera Help_' in the menu
+    - `opera --help` or `man opera` on Linux
 
-- [Opera Wiki](http://ja.opera-wiki.com)
+
+## For Japanese
+
+- [Opera Wiki (jp)](http://ja.opera-wiki.com)
     - [設定フォルダ](http://ja.opera-wiki.com/設定フォルダ)
     - [カテゴリ:設定ファイル](http://ja.opera-wiki.com/カテゴリ:設定ファイル)
     - [設定ファイルの編集](http://ja.opera-wiki.com/設定ファイルの編集)
