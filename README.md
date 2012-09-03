@@ -1,3 +1,4 @@
+<link href="http://dl.dropbox.com/u/13568667/style_sheet/markdown/markdown.css" rel="stylesheet" title="markdown"></link>
 # File List
 * * *
 
@@ -25,7 +26,7 @@
 
 ### [Opera Support](http://www.opera.com/support)
 
-> Click '_Help -> Support_' in the menu, or visit [opera.com/support](http://www.opera.com/support).
+> Click '_Help -> Support_' in the menu or visit [opera.com/support](http://www.opera.com/support).
 
 - [File used by Opera](http://www.opera.com/docs/operafiles)
 - [Opera's Command Line Options](http://www.opera.com/docs/switches)
@@ -33,11 +34,14 @@
 
 ### [Opera Help](http://help.opera.com)
 
-> Type [opera:help](opera:help) in the address bar, or click '_Help -> Opera Help_' in the menu, or visit [help.opera.com](http://help.opera.com).
+> - Click '_Help -> Opera Help_' in the menu or visit [help.opera.com](http://help.opera.com).
+> - Type [opera:help](opera:help) in the address bar and press Enter.
 
 - [Backing up Opera](opera:help/backup)
 
-> Type [opera:help/backup](opera:help/backup) in the address bar.
+> - Click '_Help -> Opera Help_' in the menu or visit [help.opera.com](http://help.opera.com), and goto 'Backing up Opera'
+> - Type [opera:help/backup](opera:help/backup) in the address bar and press Enter.
+
 
 ### [Opera Browser Wiki](http://operawiki.info)
 
