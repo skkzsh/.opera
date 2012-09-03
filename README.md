@@ -26,7 +26,7 @@
 
 ### [Opera Support](http://www.opera.com/support)
 
-> Click '_Help -> Support_' in the menu or visit [opera.com/support](http://www.opera.com/support).
+> Click '_Help -> Support_' in the menu, or visit [opera.com/support](http://www.opera.com/support).
 
 - [File used by Opera](http://www.opera.com/docs/operafiles)
 - [Opera's Command Line Options](http://www.opera.com/docs/switches)
@@ -34,12 +34,12 @@
 
 ### [Opera Help](http://help.opera.com)
 
-> - Click '_Help -> Opera Help_' in the menu or visit [help.opera.com](http://help.opera.com).
+> - Click '_Help -> Opera Help_' in the menu, or visit [help.opera.com](http://help.opera.com).
 > - Type [opera:help](opera:help) in the address bar and press Enter.
 
 - [Backing up Opera](opera:help/backup)
 
-> - Click '_Help -> Opera Help_' in the menu or visit [help.opera.com](http://help.opera.com), and goto 'Backing up Opera'
+> - Click '_Help -> Opera Help_' in the menu, or visit [help.opera.com](http://help.opera.com). Next, go to 'Backing up Opera'.
 > - Type [opera:help/backup](opera:help/backup) in the address bar and press Enter.
 
 
