@@ -17,8 +17,6 @@
 - Mac: `$HOME/Library/Opera`
 - Linux: `$HOME/.opera`
 
-See also '[About Opera](opera:about)'.
-
 
 
 # Useful Information
@@ -38,11 +36,6 @@ See also '[About Opera](opera:about)'.
 > Click '_Help -> Opera Help_' in the menu, or type [opera:help](opera:help) in the address bar, or visit [help.opera.com](http://help.opera.com).
 
 - [Backing up Opera](http://help.opera.com/Windows/12.00/en/backup.html) (Opera 12.00; Windows)
-
-
-### [About Opera](opera:about)
-
-> Click '_Help -> About Opera_' in the menu, or type [opera:about](opera:about) in the address bar.
 
 
 ### [Opera Browser Wiki](http://operawiki.info)
