@@ -17,7 +17,7 @@
 - Mac: `$HOME/Library/Opera`
 - Linux: `$HOME/.opera`
 
-See also [opera:about](opera:about).
+See also '[About Opera](opera:about)'.
 
 
 
@@ -68,7 +68,7 @@ See also [opera:about](opera:about).
 
 - [設定フォルダ](http://ja.opera-wiki.com/設定フォルダ)
 - [カテゴリ:設定ファイル](http://ja.opera-wiki.com/カテゴリ:設定ファイル)
-    - [設定ファイルの編集](http://ja.opera-wiki.com/設定ファイルの編集)
-    - [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
-    - [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
-    - [search.ini](http://ja.opera-wiki.com/search.ini)
+- [設定ファイルの編集](http://ja.opera-wiki.com/設定ファイルの編集)
+- [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
+- [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
+- [search.ini](http://ja.opera-wiki.com/search.ini)
