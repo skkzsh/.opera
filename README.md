@@ -46,6 +46,7 @@
 ### [Opera Browser Wiki](http://operawiki.info)
 
 - [Finding and Editing the Opera INI Files](http://operawiki.info/EditingINIFiles)
+- [Opera Internal Action Command List](http://operawiki.info/AllActions)
 - [Configuring Opera's Search Settings](http://operawiki.info/SearchInOpera)
 
 
@@ -62,5 +63,3 @@
 - [カテゴリ:設定ファイル](http://ja.opera-wiki.com/カテゴリ:設定ファイル)
 - [設定ファイルの編集](http://ja.opera-wiki.com/設定ファイルの編集)
 - [アクション一覧](http://ja.opera-wiki.com/アクション一覧)
-- [ウェブ検索](http://ja.opera-wiki.com/ウェブ検索)
-- [search.ini](http://ja.opera-wiki.com/search.ini)
