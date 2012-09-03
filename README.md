@@ -33,10 +33,11 @@
 
 ### [Opera Help](http://help.opera.com)
 
-> Click '_Help -> Opera Help_' in the menu, or type [opera:help](opera:help) in the address bar, or visit [help.opera.com](http://help.opera.com).
+> Type [opera:help](opera:help) in the address bar, or click '_Help -> Opera Help_' in the menu, or visit [help.opera.com](http://help.opera.com).
 
-- [Backing up Opera](http://help.opera.com/Windows/12.00/en/backup.html) (Opera 12.00; Windows)
+- [Backing up Opera](opera:help/backup)
 
+> Type [opera:help/backup](opera:help/backup) in the address bar.
 
 ### [Opera Browser Wiki](http://operawiki.info)
 
@@ -50,12 +51,6 @@
 
 
 ## For Japanese
-
-
-### [Opera ヘルプ](http://help.opera.com)
-
-- [Operaのバックアップ](http://help.opera.com/Windows/12.00/ja/backup.html) (Opera 12.00; Windows)
-
 
 ### [Opera Wiki (jp)](http://ja.opera-wiki.com)
 
