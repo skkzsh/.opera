@@ -1,11 +1,11 @@
 # File List
 * * *
 
-- [keyboard](.opera/tree/master/keyboard) controls which key commands do what.
-- [mouse](.opera/tree/master/mouse) controls which mouse gestures do what.
-- [toolbar](.opera/tree/master/toolbar) controls toolbar layout.
-- [search.ini](.opera/tree/master/search.ini) defines the search engines.
-- [override.ini](.opera/tree/master/override.ini) defines the site preferences.
+- [keyboard](.opera/tree/master/keyboard) defines which key commands do what.
+- [mouse](.opera/tree/master/mouse) defines which mouse gestures do what.
+- [toolbar](.opera/tree/master/toolbar) defines toolbar layout.
+- [search.ini](.opera/tree/master/search.ini) controls the search engines.
+- [override.ini](.opera/tree/master/override.ini) controls the site preferences.
 - [bin](.opera/blob/master/bin) includes my setup scripts.
 - [README.md](.opera/blob/master/README.md) is this file.
 
