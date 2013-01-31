@@ -2,7 +2,7 @@
 
 =head1 DESCRIPTION
 
-Symbolic Link and Copy Setting Files
+Make Symbolic Links or Copy Setting Files
 in order to Share Opera Settings with Opera Next ones
 
 =cut
@@ -102,6 +102,7 @@ sub where_are_dirs {
 sub setup {
     my ( $dir_ref, $setup_files_ref ) = @_;
 
+    ## TODO: Keys, Values
     for my $dir_type (qw( library support )) {
         for my $cmd (qw( ln cp )) {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {

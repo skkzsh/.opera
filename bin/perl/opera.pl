@@ -4,7 +4,7 @@
 
 =head2 Setup Mode
 
-Symbolic Link and Copy
+Make Symbolic Links or Copy
 Opera [Next] Setting Files
 from Dropbox
 
@@ -36,7 +36,7 @@ $color = 'red';
 # $color = 'white';
 # $color = 'spdy';
 
-### Symbolic Link and Copy Files for Each Directory
+### Make Symbolic Links or Copy Files for Each Directory
 my @ln_library_files = qw( keyboard mouse toolbar );
 my @ln_support_files;
 my @cp_library_files = qw( override.ini search.ini );
@@ -73,11 +73,11 @@ my %dir = &where_are_dirs($color);
 
 given ($mode) {
     when ('setup') {
-        say 'Setup !';
+        say 'Setup!';
         &setup( $dropbox, \%dir, \%setup_files );
     }
     when ('backup') {
-        say 'Backup !';
+        say 'Backup!';
         &backup( $dropbox, \%dir, \%backup_files );
     }
     default { die $mode }
@@ -142,14 +142,15 @@ sub where_are_dirs {
     %dir;
 }
 
-## Symbolic Link and Copy Opera [Next] Setting Files from Dropbox
+## Make Symbolic Links or Copy Opera [Next] Setting Files from Dropbox
 ## Arguments
 # $dropbox         : Opera Directory in Dropbox
 # $dir_ref         : (Reference of) Directories of Opera [Next]
-# $setup_files_ref : (Reference of) Symbolic Link and Copy Files for Each Directory
+# $setup_files_ref : (Reference of) Symbolic Link or Copy Files for Each Directory
 sub setup {
     my ( $dropbox, $dir_ref, $setup_files_ref ) = @_;
 
+    ## TODO: Keys, Values
     for my $dir_type (qw( library support )) {
         for my $cmd (qw( ln cp )) {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {
@@ -173,7 +174,7 @@ sub setup {
 
 }
 
-## Symbolic Link Opera [Next] Mail Signatures from Dropbox
+## Make Symbolic Links of Opera [Next] Mail Signatures from Dropbox
 ## Arguments
 # $dropbox     : Opera Directory in Dropbox
 # $dir_support : Application Suppport Directory of Opera [Next]
@@ -198,6 +199,7 @@ sub ln_signature {
 sub backup {
     my ( $dropbox, $dir_ref, $backup_files_ref ) = @_;
 
+    ## TODO: Keys, Values
     for my $dir_type (qw( library support )) {
         for my $file ( @{ $backup_files_ref->{$dir_type} } ) {
             smartln(
@@ -208,22 +210,3 @@ sub backup {
         }
     }
 }
-
-=head1 Memo
-
-=head2 Bookmark
-
-Set Directly bookmark.adr in Dropbox
-by opera:config or operaprefs.ini
-
-=head2 PATH
-
-Linux | ~/.opera[-next]
-
-Mac   | ~/Library/Opera [Next]
-      | ~/Library/Application Support/Opera [Next]
-
-Win   | C:\Users\xxx\AppData\Roaming\Opera\Opera [Next]
-      | C:\Users\xxx\AppData\Local\Opera\Opera [Next]
-
-=cut
