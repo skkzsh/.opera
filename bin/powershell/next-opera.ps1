@@ -1,22 +1,35 @@
 <#
 .SYNOPSIS
-Symbolic Link and Copy Setting Files
+Make Symbolic Links or Copy Setting Files
 in order to Share Opera Settings with Opera Next ones
 #>
+
+## TODO: Env
 
 #### Setting
 
 ### Opera‚ÆOpera Next‚ÌDirecties
-$red   = 'Opera'
-$white = 'Opera Next'
+$dst_color = 'Opera Next'
+#$dst_color = 'Opera'
 
-$app_red        = "$ENV:APPDATA\Opera\$red"
-$localapp_red   = "$ENV:LOCALAPPDATA\Opera\$red"
-$app_white      = "$ENV:APPDATA\Opera\$white"
-$localapp_white = "$ENV:LOCALAPPDATA\Opera\$white"
+$app_opera      = "$ENV:APPDATA\Opera"
+$localapp_opera = "$ENV:LOCALAPPDATA\Opera"
+
+switch ($ENV:COMPUTERNAME) {
+    default {
+        $prefix_app_src      = $app_opera
+        $prefix_localapp_src = $localapp_opera
+    }
+}
+
+$src_color = 'Opera'
+$app_src      = "$prefix_app_src\$src_color"
+$localapp_src = "$prefix_localapp_src\$src_color"
+$app_dst      = "$app_opera\$dst_color"
+$localapp_dst = "$localapp_opera\$dst_color"
 
 ### EXIT if These Folders NOT Exist
-foreach ($dir in $app_red, $localapp_red, $app_white, $localapp_white) {
+foreach ($dir in $app_src, $localapp_src, $app_dst, $localapp_dst) {
     if (-not(Test-Path $dir)) {
         $Host.UI.WriteErrorLine("Error: $dir not exists.")
         exit 1
@@ -25,33 +38,54 @@ foreach ($dir in $app_red, $localapp_red, $app_white, $localapp_white) {
 
 ### MKLINK‚ÆCOPY‚ÌList
 ### TODO: Hash
-$ln_app_folders = 'sessions'
-# $ln_app_files =
-# $cp_app_folders =
-$cp_app_files = 'global_history.dat', 'opcacrt6.dat', 'opcert6.dat', 'opssl6.dat', 'typed_history.xml', 'wand.dat'
-$ln_localapp_folders = 'widgets'
-# $ln_localapp_files =
-# $cp_localapp_folders =
-# $cp_localapp_files =
+$setup_files = @{
+    app = @{
+        ln = @{
+            files = $null
+            folders = 'sessions'
+        }
+        cp = @{
+            files = 'global_history.dat', 'opcacrt6.dat', 'opcert6.dat', 'opssl6.dat', 'typed_history.xml', 'wand.dat'
+            folders = $null
+        }
+    }
 
-### Symbolic Link
-## APPDATA
-## Folders
-foreach ($file in $ln_app_folders) {
-    smartln.ps1 mklink "$app_red\$file" "$app_white\$file"
+    local = @{
+        ln = @{
+            files = $null
+            folders = $null
+        }
+        cp = @{
+            files = $null
+            folders = 'widgets'
+        }
+    }
 }
 
-### LOCALAPPDATA
+### APPDATA
+## Symbolic Link
 ## Folders
-foreach ($file in $ln_localapp_folders) {
-    smartln.ps1 mklink "$localapp_red\$file" "$localapp_white\$file"
+foreach ($file in $setup_files.app.ln.folders) {
+    smartln.ps1 mklink "$app_src\$file" "$app_dst\$file"
 }
 
 ### COPY
-## APPDATA
 ## Files
-foreach ($file in $cp_app_files) {
-    smartln.ps1 copy "$app_red\$file" "$app_white\$file"
+foreach ($file in $setup_files.app.cp.files) {
+    smartln.ps1 copy "$app_src\$file" "$app_dst\$file"
+}
+
+### LOCALAPPDATA
+## Symbolic Link
+## Folders
+#foreach ($file in $ln_localapp_folders) {
+#    smartln.ps1 mklink "$localapp_src\$file" "$localapp_dst\$file"
+#}
+
+## COPY
+## Folders
+foreach ($file in $cp_localapp_folders) {
+    smartln.ps1 copy "$localapp_src\$file" "$localapp_dst\$file"
 }
 
 exit 0

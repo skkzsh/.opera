@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Get My Opera Setting Files from Internet
+Get My Opera Setting Files from the Internet
 #>
 
 ## TODO: Env
