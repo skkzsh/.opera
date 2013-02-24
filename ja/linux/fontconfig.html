@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>fontconfig.html</title>
+
+</head>
+
+<body>
+
+<p><link href="http://skkzsh.github.com/style_sheet/markdown/markdown.css" rel="stylesheet" title="markdown"></link></p>
+
+<p><link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /></p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('pre').css({
+        'background-color': '#f6f6f6',
+        'border': '1px dotted #ccc',
+        'padding': '0.8em'
+    });
+    $('pre code').addClass('prettyprint');
+    prettyPrint();
+});
+</script>
+
+<h1>Ubuntuでデスクトップ環境を変えても, Operaのフォントを綺麗なままに</h1>
+
+<ul>
+<li>プラットフォーム: Ubuntu 12.04</li>
+<li>Operaのバージョン: 12.14</li>
+</ul>
+
+<h2>問題点</h2>
+
+<p>デフォルトのデスクトップ環境であるUnityでは, フォントはTakaoゴシックで比較的綺麗.<br />しかし, ウィンドウ・マネージャをFluxboxに変えると, Operaのフォントが汚くなる.</p>
+
+<h2>解決法</h2>
+
+<p>解決法は以下の2通り.</p>
+
+<h3>その1</h3>
+
+<p>アドレスバーに"<a href="opera:config">opera:config</a>"と入力してEnterを押す.<br />"<code>fontconfig</code>"と検索して, 項目にチェック.</p>
+
+<h3>その2</h3>
+
+<p><code>~/.opera/operaprefs.ini</code>に以下を追記.</p>
+
+<pre><code>[Fonts]
+Prefer Fontconfig Settings=1
+</code></pre>
+
+<hr />
+
+<p>[<a href="../index.html">Home</a>]<br /><em>Last Change: 2013/02/25 06:41:47 JST</em></p>
+
+</body>
+</html>
