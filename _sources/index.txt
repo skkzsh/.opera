@@ -1,0 +1,41 @@
+Opera メモ
+===============
+
+`github.com/skkzsh/.opera <https://github.com/skkzsh/.opera>`_
+
+.. 各種設定 (書くかも)
+.. --------------------
+
+.. キーボード
+.. ********************
+
+.. 検索
+.. ********************
+
+.. エクステンション
+.. ********************
+
+.. .. toctree::
+..    :maxdepth: 1
+
+..    config/widgets/list.rst
+
+
+各OSの設定
+--------------------
+
+Mac
+***************
+
+.. toctree::
+   :maxdepth: 1
+
+   os/mac/slow-keyboard.rst
+
+Linux
+***************
+
+.. toctree::
+   :maxdepth: 1
+
+   os/linux/fontconfig.rst

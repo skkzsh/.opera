@@ -1,0 +1,105 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ubuntuでデスクトップ環境を変えても, Operaのフォントを綺麗なままに &mdash; top</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="top" href="../../index.html" />
+    <link rel="prev" title="Mac版Opera12でキーボード操作のレスポンスが異常に遅い" href="../mac/slow-keyboard.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../mac/slow-keyboard.html" title="Mac版Opera12でキーボード操作のレスポンスが異常に遅い"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">top</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="ubuntu-opera">
+<h1>Ubuntuでデスクトップ環境を変えても, Operaのフォントを綺麗なままに<a class="headerlink" href="#ubuntu-opera" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>プラットフォーム: Ubuntu 12.04</li>
+<li>Operaのバージョン: 12.14</li>
+</ul>
+<div class="section" id="id1">
+<h2>問題点<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">デフォルトのデスクトップ環境であるUnityでは, フォントはTakaoゴシックで比較的綺麗.</div>
+<div class="line">しかし, ウィンドウ・マネージャをFluxboxに変えると, Operaのフォントが汚くなる.</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>解決法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>解決法は以下の2通り.</p>
+<div class="section" id="id3">
+<h3>その1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">アドレスバーに <a class="reference external" href="opera:config">opera:config</a> と入力してEnterを押す.</div>
+<div class="line">&#8220;fontconfig&#8221;と検索して, 項目にチェック.</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>その2<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">~/.opera/operaprefs.ini</span></tt> に以下を追記.</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[Fonts]</span>
+<span class="na">Prefer Fontconfig Settings</span><span class="o">=</span><span class="s">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../mac/slow-keyboard.html" title="Mac版Opera12でキーボード操作のレスポンスが異常に遅い"
+             >previous</a> |</li>
+        <li><a href="../../index.html">top</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, skkzsh.
+      Last updated on Feb 28, 2013.
+    </div>
+  </body>
+</html>

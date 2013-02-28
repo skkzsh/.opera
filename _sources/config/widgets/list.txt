@@ -1,0 +1,9 @@
+入れているエクステンション
+==============================
+
+あまり入れていない.
+
+- `AutoPatchWork <https://addons.opera.com/ja/extensions/details/autopatchwork/?display=en>`_
+- `Hint-a-Hint for Opera <https://addons.opera.com/ja/extensions/details/hit-a-hint-for-opera/>`_
+- `Snap Links <https://addons.opera.com/ja/extensions/details/snap-links/?display=en>`_
+- `Xtranslate <https://addons.opera.com/ja/extensions/details/xtranslate/>`_
