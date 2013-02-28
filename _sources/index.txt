@@ -3,8 +3,13 @@ Opera メモ
 
 `github.com/skkzsh/.opera <https://github.com/skkzsh/.opera>`_
 
-.. 各種設定 (書くかも)
-.. --------------------
+各種設定
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   config/widgets/list.rst
 
 .. キーボード
 .. ********************
@@ -14,11 +19,6 @@ Opera メモ
 
 .. エクステンション
 .. ********************
-
-.. .. toctree::
-..    :maxdepth: 1
-
-..    config/widgets/list.rst
 
 
 各OSの設定
