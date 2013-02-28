@@ -7,3 +7,5 @@
 - `Hint-a-Hint for Opera <https://addons.opera.com/ja/extensions/details/hit-a-hint-for-opera/>`_
 - `Snap Links <https://addons.opera.com/ja/extensions/details/snap-links/?display=en>`_
 - `Xtranslate <https://addons.opera.com/ja/extensions/details/xtranslate/>`_
+
+- `はてなブックマーク <http://orera.g.hatena.ne.jp/edvakf/20110418/1303143668>`_
