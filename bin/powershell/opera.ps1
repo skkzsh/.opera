@@ -2,10 +2,10 @@
 
 .SYNOPSIS
 
-[Setup Mode]
+<Setup Mode>
 Make Symbolic Links or Copy
 Opera [Next] Setting Files
-from Dropbox
+from Dropbox or Repository
 
 #>
 
@@ -20,80 +20,105 @@ $color = 'Opera'
 # $color = 'Opera Next'
 
 
-### Dropbox‚ÌOpera‚ÌDirectory
+### Opera Folder in Dropbox or Repository
 switch ($ENV:COMPUTERNAME) {
     default           { $prefix = "$ENV:USERPROFILE" }
 }
-$dropbox = "$prefix\Dropbox\setting\.opera"
+$dropbox = "$prefix\Dropbox\Computer\Settings\.opera"
+$repos = "$prefix\Repository\bitbucket\unix_files\.opera"
 
-### Local‚ÌOpera‚ÌDirectories
+### Opera Folders on Local
 $app = "$ENV:APPDATA\Opera\$color"
 $localapp = "$ENV:LOCALAPPDATA\Opera\$color"
 
 ### EXIT if These Folders NOT Exist
-foreach ($dir in $app, $localapp, $dropbox) {
-    if (-not(Test-Path $dir)) {
-        $Host.UI.WriteErrorLine("Error: $dir not exists.")
+$app, $localapp, $dropbox, $repos | % {
+    if (-not(Test-Path $_)) {
+        $Host.UI.WriteErrorLine("Error: $_ not exists.")
         exit 1
     }
 }
 
 Write-Output "$color Setup!"
 
-### MKLINK‚ÆCOPY‚ÌList
-## TODO: Hash
-## skin
-$ln_app_folders = 'keyboard', 'mouse', 'toolbar', 'skin'
-# $ln_app_files =
-# $cp_app_folders = 'toolbar'
-$cp_app_files = 'override.ini', 'search.ini'
-# $ln_local_folders =
-# $ln_local_files =
-# $cp_local_folders =
-# $cp_local_files =
-
+### File List of 'MKLINK' & 'COPY'
+## TODO: Skin Toolbar
+## FIXME: Hash
 $setup_files = @{
     app = @{
-        ln = @{
-            files = $null
-            folders = $ln_app_folders
+        repos = @{
+            ln = @{
+                files = $null
+                folders = 'keyboard', 'mouse'
+            }
+            cp = @{
+                files = 'override.ini', 'search.ini'
+                folders = 'toolbar'
+            }
         }
-        cp = @{
-            files = $cp_app_files
-            folders = $null
+        dropbox = @{
+            ln = @{
+                files = $null
+                folders = 'skin'
+            }
+            cp = @{
+                files = $null
+                folders = $null
+            }
         }
     }
 
     local = @{
-        ln = @{
-            files = $null
-            folders = $null
+        repos = @{
+            ln = @{
+                files = $null
+                folders = $null
+            }
+            cp = @{
+                files = $null
+                folders = $null
+            }
         }
-        cp = @{
-            files = $null
-            folders = $null
+        dropbox = @{
+            ln = @{
+                files = $null
+                folders = $null
+            }
+            cp = @{
+                files = $null
+                folders = $null
+            }
         }
     }
 }
 
-### Backup‚ÌList
+### Backup File List
 # $backup_app_folders =
 # $backup_app_files =
 # $backup_local_folders =
 # $backup_local_files =
 
+### TODO: Keys, Values
+
 ### Symbolic Link
 ## APPDATA
 ## Folders
-foreach ($file in $setup_files.app.ln.folders) {
-    smartln.ps1 mklink "$dropbox\$file" "$app\$file"
+$setup_files.app.repos.ln.folders | % {
+    smartln.ps1 mklink "$repos\$_" "$app\$_"
+}
+$setup_files.app.dropbox.ln.folders | % {
+    smartln.ps1 mklink "$dropbox\$_" "$app\$_"
 }
 
 ### Copy
 ## APPDATA
 ## Files
-foreach ($file in $setup_files.app.cp.files) {
-    smartln.ps1 copy "$dropbox\$file" "$app\$file"
+$setup_files.app.repos.cp.files | % {
+    smartln.ps1 copy "$repos\$_" "$app\$_"
+}
+## Folders
+$setup_files.app.repos.cp.folders | % {
+    smartln.ps1 copy "$repos\$_" "$app\$_"
 }
 
 ### Mail Signature
@@ -104,8 +129,8 @@ switch ($ENV:COMPUTERNAME) {
 }
 
 if ($num -ne 0) {
-    foreach ($i in 1..2) {
-        smartln.ps1 mklink "$dropbox\mail\signature$i.txt" "$localapp\mail\signature$($num[$($i - 1)]).txt"
+    1..2 | % {
+        smartln.ps1 mklink "$repos\mail\signature$_.txt" "$localapp\mail\signature$($num[$($_ - 1)]).txt"
     }
 }
 

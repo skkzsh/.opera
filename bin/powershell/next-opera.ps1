@@ -8,7 +8,7 @@ in order to Share Opera Settings with Opera Next ones
 
 #### Setting
 
-### Opera‚ÆOpera Next‚ÌDirecties
+### Folders of Opera & Opera Next
 $dst_color = 'Opera Next'
 #$dst_color = 'Opera'
 
@@ -22,6 +22,7 @@ switch ($ENV:COMPUTERNAME) {
     }
 }
 
+### TODO: Hash
 $src_color = 'Opera'
 $app_src      = "$prefix_app_src\$src_color"
 $localapp_src = "$prefix_localapp_src\$src_color"
@@ -29,14 +30,14 @@ $app_dst      = "$app_opera\$dst_color"
 $localapp_dst = "$localapp_opera\$dst_color"
 
 ### EXIT if These Folders NOT Exist
-foreach ($dir in $app_src, $localapp_src, $app_dst, $localapp_dst) {
-    if (-not(Test-Path $dir)) {
-        $Host.UI.WriteErrorLine("Error: $dir not exists.")
+$app_src, $localapp_src, $app_dst, $localapp_dst | % {
+    if (-not(Test-Path $_)) {
+        $Host.UI.WriteErrorLine("Error: $_ not exists.")
         exit 1
     }
 }
 
-### MKLINK‚ÆCOPY‚ÌList
+### File List of 'MKLINK' & 'COPY'
 ### TODO: Hash
 $setup_files = @{
     app = @{
@@ -65,27 +66,27 @@ $setup_files = @{
 ### APPDATA
 ## Symbolic Link
 ## Folders
-foreach ($file in $setup_files.app.ln.folders) {
-    smartln.ps1 mklink "$app_src\$file" "$app_dst\$file"
+$setup_files.app.ln.folders | % {
+    smartln.ps1 mklink "$app_src\$_" "$app_dst\$_"
 }
 
 ### COPY
 ## Files
-foreach ($file in $setup_files.app.cp.files) {
-    smartln.ps1 copy "$app_src\$file" "$app_dst\$file"
+$setup_files.app.cp.files | % {
+    smartln.ps1 copy "$app_src\$_" "$app_dst\$_"
 }
 
 ### LOCALAPPDATA
 ## Symbolic Link
 ## Folders
-#foreach ($file in $ln_localapp_folders) {
-#    smartln.ps1 mklink "$localapp_src\$file" "$localapp_dst\$file"
+#$ln_localapp_folders | % {
+#    smartln.ps1 mklink "$localapp_src\$_" "$localapp_dst\$_"
 #}
 
 ## COPY
 ## Folders
-foreach ($file in $cp_localapp_folders) {
-    smartln.ps1 copy "$localapp_src\$file" "$localapp_dst\$file"
+$cp_localapp_folders | % {
+    smartln.ps1 copy "$localapp_src\$_" "$localapp_dst\$_"
 }
 
 exit 0
