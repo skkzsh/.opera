@@ -1,10 +1,12 @@
 #!/bin/sh
-#
-# Opera NextとOperaの設定を
-# 共有させるために
-# Symbolic Linkを張る,
-# またはCopyする.
-########################################
+: << POD
+=head1 DESCRIPTION
+
+Make Symbolic Links or Copy Setting Files
+in order to Share Opera Settings with Opera Next ones
+
+=cut
+POD
 
 ### rm, cpのOption
 alias rm='rm -i'

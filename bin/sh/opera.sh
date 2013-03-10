@@ -1,17 +1,21 @@
 #!/bin/sh
-#
-# DropboxにあるOpera (Next) の
-# 設定Fileを共有させるために
-# Symbolic Linkを張る,
-# またはCopyする.
-#
-# Operaの設定をDropboxにBackup
-#
-# Bookmarkはopera:config (operaprefs.ini) で
-# Dropbox内のbookmar.adrを直接指定
-#
-########################################
+: << POD
+=head1 DESCRIPTION
 
+=head2 Setup Mode
+
+Make Symbolic Links or Copy
+Opera [Next] Setting Files
+from Dropbox or Repository
+
+=head2 Backup Mode
+
+Copy
+Opera [Next] Setting Files
+to Dropbox or Repository
+
+=cut
+POD
 
 ### Setup or Backup
 mode=setup
@@ -26,8 +30,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 
 ## lnとcpのList
-ln_list='keyboard mouse toolbar'
-cp_list='override.ini search.ini'
+## TODO: Skin Toolbar
+ln_list='keyboard mouse'
+cp_list='toolbar override.ini search.ini'
 ln_support_list=''
 cp_support_list=''
 ## BackupのList
@@ -39,6 +44,7 @@ backup_support_list=''
 
 ## DropboxのOperaのDirectory
 dropbox=~/Dropbox/setting/.opera
+repos=~/Repository/bitbucket/unix_files/.opera
 
 ## LocalのOperaのDirectories
 case "`uname`" in
@@ -82,23 +88,23 @@ case "$mode" in
 
         ### Symbolic Link
         for file in $ln_list; do
-            SmartLn ln "$dropbox/$file" "$dot/$file"
+            SmartLn ln "$repos/$file" "$dot/$file"
         done
 
         ### Copy
         for file in $cp_list; do
-            SmartLn cp "$dropbox/$file" "$dot/$file"
+            SmartLn cp "$repos/$file" "$dot/$file"
         done
 
 
         ### Mail Signaure
         ## TODO: 配列
-        db_sig1="$dropbox/mail/signature1.txt"
-        db_sig2="$dropbox/mail/signature2.txt"
+        db_sig1="$repos/mail/signature1.txt"
+        db_sig2="$repos/mail/signature2.txt"
         support_sig="$dot_support/mail/signature"
 
         case "$HOSTNAME" in
-            sing* | drive* | leap* | box*)
+            sing* | box*)
                 SmartLn ln "$db_sig1" "${support_sig}1.txt"
                 SmartLn ln "$db_sig2" "${support_sig}2.txt"
                 ;;
