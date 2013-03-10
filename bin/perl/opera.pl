@@ -6,13 +6,13 @@
 
 Make Symbolic Links or Copy
 Opera [Next] Setting Files
-from Dropbox
+from Dropbox or Repository
 
 =head2 Backup Mode
 
 Copy
 Opera [Next] Setting Files
-to Dropbox
+to Dropbox or Repository
 
 =cut
 
@@ -27,8 +27,8 @@ use SmartLn qw( smartln );
 
 ### Setup or Backup
 my $mode;
-# $mode = 'setup';
-$mode = 'backup';
+$mode = 'setup';
+# $mode = 'backup';
 
 ### Opera or Opera Next
 my $color;
@@ -37,9 +37,11 @@ $color = 'red';
 # $color = 'spdy';
 
 ### Make Symbolic Links or Copy Files for Each Directory
-my @ln_library_files = qw( keyboard mouse toolbar );
+## TODO: Skin Toolbar
+## FIXME: Hash
+my @ln_library_files = qw( keyboard mouse );
 my @ln_support_files;
-my @cp_library_files = qw( override.ini search.ini );
+my @cp_library_files = qw( toolbar override.ini search.ini );
 my @cp_support_files;
 my %setup_files = (
     library => { ln => \@ln_library_files, cp => \@cp_library_files },
@@ -53,15 +55,16 @@ my %backup_files = (
     support => \@backup_support_files,
 );
 
-## Opera Directory in Dropbox
-my $prefix_dropbox;
+## Opera Directory in Dropbox or Repository
+my $prefix;
 if ( $^O eq 'MSWin32' ) {
-    $prefix_dropbox = $ENV{USERPROFILE};
+    $prefix = $ENV{USERPROFILE};
 }
 else {
-    $prefix_dropbox = $ENV{HOME};
+    $prefix = $ENV{HOME};
 }
-my $dropbox = dir $prefix_dropbox, 'Dropbox', 'setting', '.opera';
+my $dropbox = dir $prefix, 'Dropbox', 'setting', '.opera';
+my $repos = dir $prefix, 'Repository', 'bitbucket', 'unix_files', '.opera';
 
 given ($color) {
     when ('red')   { print 'Opera ' }
@@ -74,11 +77,11 @@ my %dir = &where_are_dirs($color);
 given ($mode) {
     when ('setup') {
         say 'Setup!';
-        &setup( $dropbox, \%dir, \%setup_files );
+        &setup( $repos, \%dir, \%setup_files );
     }
     when ('backup') {
         say 'Backup!';
-        &backup( $dropbox, \%dir, \%backup_files );
+        &backup( $repos, \%dir, \%backup_files );
     }
     default { die $mode }
 }
@@ -142,13 +145,13 @@ sub where_are_dirs {
     %dir;
 }
 
-## Make Symbolic Links or Copy Opera [Next] Setting Files from Dropbox
+## Make Symbolic Links or Copy Opera [Next] Setting Files from Dropbox or Repository
 ## Arguments
-# $dropbox         : Opera Directory in Dropbox
+# $repos         : Opera Directory in Repository
 # $dir_ref         : (Reference of) Directories of Opera [Next]
-# $setup_files_ref : (Reference of) Symbolic Link or Copy Files for Each Directory
+# $setup_files_ref : (Reference of) Symbolic Link and Copy Files for Each Directory
 sub setup {
-    my ( $dropbox, $dir_ref, $setup_files_ref ) = @_;
+    my ( $repos, $dir_ref, $setup_files_ref ) = @_;
 
     ## TODO: Keys, Values
     for my $dir_type (qw( library support )) {
@@ -156,7 +159,7 @@ sub setup {
             for my $file ( @{ $setup_files_ref->{$dir_type}{$cmd} } ) {
                 smartln(
                     $cmd,
-                    file( $dropbox,             $file ),
+                    file( $repos,               $file ),
                     file( $$dir_ref{$dir_type}, $file )
                 );
             }
@@ -166,38 +169,38 @@ sub setup {
     ### Mail Signaure
     ### TODO: まとめる
     given (hostname) {
-        when (/^(sing|drive|leap|box)/) {
-            &ln_signature( $dropbox, $$dir_ref{'support'}, 1, 2 );
+        when (/^(sing|box)/) {
+            &ln_signature( $repos, $$dir_ref{'support'}, 1, 2 );
         }
         default { warn hostname }
     }
 
 }
 
-## Make Symbolic Links of Opera [Next] Mail Signatures from Dropbox
+## Make Symbolic Links of Opera [Next] Mail Signatures from Dropbox or Repository
 ## Arguments
-# $dropbox     : Opera Directory in Dropbox
+# $repos        : Opera Directory in Repository
 # $dir_support : Application Suppport Directory of Opera [Next]
 # @num         : Numbers of Mail Accounts
 sub ln_signature {
-    my ( $dropbox, $dir_support, @num ) = @_;
+    my ( $repos, $dir_support, @num ) = @_;
 
     for ( 1 .. 2 ) {
         smartln(
             'ln',
-            file( $dropbox,     'mail', "signature$_.txt" ),
+            file( $repos,     'mail', "signature$_.txt" ),
             file( $dir_support, 'mail', "signature$num[$_ - 1].txt" )
         );
     }
 }
 
-## Copy Opera [Next] Setting Files to Dropbox
+## Copy Opera [Next] Setting Files to Dropbox or Repository
 ## Arguments
-# $dropbox          : Opera Directory in Dropbox
+# $repos             : Opera Directory in Repository
 # $dir_ref          : (Reference of) Directories of Opera [Next]
 # $backup_files_ref : (Reference of) Copy Files for Each Directory
 sub backup {
-    my ( $dropbox, $dir_ref, $backup_files_ref ) = @_;
+    my ( $repos, $dir_ref, $backup_files_ref ) = @_;
 
     ## TODO: Keys, Values
     for my $dir_type (qw( library support )) {
@@ -205,7 +208,7 @@ sub backup {
             smartln(
                 'cp',
                 file( $$dir_ref{$dir_type}, $file ),
-                file( $dropbox,             $file )
+                file( $repos,               $file )
             );
         }
     }
