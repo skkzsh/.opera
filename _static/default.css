@@ -16,7 +16,7 @@
 body {
     font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
     font-size: 100%;
-    background-color: #8b0000;
+    background-color: #6b1A1A;
     color: #000;
     margin: 0;
     padding: 0;
@@ -55,7 +55,7 @@ div.footer a {
 }
 
 div.related {
-    background-color: #cd5555;
+    background-color: #941111;
     line-height: 30px;
     color: #ffffff;
 }
@@ -142,7 +142,7 @@ div.body h4,
 div.body h5,
 div.body h6 {
     font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
-    background-color: #ffefd5;
+    background-color: #ffe4e1;
     font-weight: normal;
     color: #20435c;
     border-bottom: 1px solid #ccc;
