@@ -23,4 +23,4 @@ Mac版Opera12でキーボード操作のレスポンスが異常に遅い
 
 ココ_ から過去のバージョンのOperaをダウンロードして, バグが修正されるまで気長に待つ.
 
-.. _ココ: http://jp.opera.com/browser/download/?os=mac&list=all
+.. _ココ: http://www.opera.com/download/guide/?os=mac&list=all
