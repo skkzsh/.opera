@@ -1,5 +1,4 @@
 # File List
-* * *
 
 - [keyboard](keyboard) defines which key commands do what.
 - [mouse](mouse) defines which mouse gestures do what.
@@ -13,7 +12,6 @@
 
 
 # Profile Directory
-* * *
 
 - Windows: `%APPDATA%\Opera\Opera`
 - Mac: `$HOME/Library/Opera`
@@ -22,8 +20,6 @@
 
 
 # Useful Information
-* * *
-
 
 ### [Opera Support](http://www.opera.com/support)
 
